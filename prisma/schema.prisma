@@ -31,11 +31,14 @@ model User {
 model Session {
   id                   String   @id
   expiresAt            DateTime
+  token                String   @unique
   ipAddress            String?
   userAgent            String?
   userId               String
   users                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   activeOrganizationId String?
+  createdAt            DateTime
+  updatedAt            DateTime
 
   @@map("session")
 }
@@ -51,6 +54,8 @@ model Account {
   idToken      String?
   expiresAt    DateTime?
   password     String?
+  createdAt    DateTime
+  updatedAt    DateTime
 
   @@map("account")
 }

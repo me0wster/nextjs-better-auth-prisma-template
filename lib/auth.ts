@@ -39,7 +39,13 @@ export const auth = betterAuth({
       });
     },
     sendEmailVerificationOnSignUp: true,
-    async sendVerificationEmail({ email, url }: { email: string; url: string }) {
+    async sendVerificationEmail({
+      email,
+      url,
+    }: {
+      email: string;
+      url: string;
+    }) {
       const res = await resend.emails.send({
         from,
         to: to || email,
@@ -97,7 +103,7 @@ export const auth = betterAuth({
     user: {
       create: {
         after: async (user) => {
-          //perform additional actions, like creating a stripe customer
+          // Perform additional actions, like creating a stripe customer
           const stripeCustomer = await stripe.customers.create({
             email: user.email,
             name: user.name,
